@@ -205,7 +205,11 @@ def main():
 # Load Gemini model if available
 genai_model = None
 if api_key:
-    genai_model = GenerativeModel('gemini-1.5-flash')
+    import google.generativeai as genai
+    genai.configure(api_key=api_key)
+    genai_model = genai.GenerativeModel('gemini-1.5-flash')
+else:
+    st.error("Gemini API key not found. Please check the .env file.")
 
 # Run app
 if __name__ == "__main__":
